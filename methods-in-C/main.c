@@ -1,4 +1,4 @@
-#include <qb_object.h>
+#include "qb_object.h"
 
 static void int_fake_method(qb_object *const self);
 
