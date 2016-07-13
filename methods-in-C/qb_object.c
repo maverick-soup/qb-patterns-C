@@ -17,7 +17,7 @@ struct
 
 /* Internal functions declarations-------------------------------------------*/
 
-static void int_method(qb_object *self);
+static void int_method(qb_object *const self);
 
 /* Functions definitions-----------------------------------------------------*/
 
@@ -30,7 +30,7 @@ qb_object qb_object_create(void)
     return temp;
 }
 
-static void int_method(qb_object *self)
+static void int_method(qb_object *const self)
 {
     if (is_null(self->object))
     {

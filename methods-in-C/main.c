@@ -1,6 +1,6 @@
-#include <qb_obejct.h>
+#include <qb_object.h>
 
-static void int_fake_method(qb_object *self);
+static void int_fake_method(qb_object *const self);
 
 int main(int argc, char *argv[])
 {
@@ -14,9 +14,8 @@ int main(int argc, char *argv[])
     qb_object_destroy(&object);
 }
 
-static void int_fake_method(qb_object *object)
+static void int_fake_method(qb_object *const object)
 {
     printf("Fake method");
     self->method(self);
 }
-

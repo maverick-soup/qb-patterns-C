@@ -20,7 +20,7 @@ typedef struct qb_object_impl_s* qb_object_impl_ptr;
 
 typedef struct qb_object
 {
-    void (*method)(qb_obejct *self);
+    void (*method)(qb_obejct *const self);
     qb_object_impl_ptr object;
 } qb_object;
 
