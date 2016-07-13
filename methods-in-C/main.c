@@ -1,21 +1,27 @@
 #include "qb_object.h"
 
-static void int_fake_method(qb_object *const self);
+#include <stdio.h>
+
+static void int_fake_method(struct qb_object *const self);
 
 int main(int argc, char *argv[])
 {
-    qb_object test = {0};
-    qb_object object = qb_object_create();
+    struct qb_object test = {0};
+    struct qb_object object = qb_object_create();
 
-    test.method = listener.method;
-    listener.method = int_fake_method;
-    listener.method(&test);
+    (void) argc;
+    (void) argv;
+
+    test.method = object.method;
+    object.method = int_fake_method;
+    object.method(&test);
 
     qb_object_destroy(&object);
+    return 1;
 }
 
-static void int_fake_method(qb_object *const object)
+static void int_fake_method(struct qb_object *const self)
 {
-    printf("Fake method");
+    printf("Fake method\n");
     self->method(self);
 }

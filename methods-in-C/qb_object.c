@@ -1,4 +1,6 @@
-#inlcude "qb_object.h"
+#include "qb_object.h"
+
+#include <stdio.h>
 
 /* Copyright (C)-------------------------------------------------------------*/
 
@@ -19,29 +21,30 @@ struct
 
 /* Internal functions declarations-------------------------------------------*/
 
-static void int_method(qb_object *const self);
+static void int_method(struct qb_object *const self);
 
 /* Functions definitions-----------------------------------------------------*/
 
-qb_object qb_object_create(void)
+struct qb_object qb_object_create(void)
 {
-    qb_object temp = {0};
+    struct qb_object temp = {0};
 
     temp.method = int_method;
 
     return temp;
 }
 
-static void int_method(qb_object *const self)
+static void int_method(struct qb_object *const self)
 {
-    if (is_null(self->object))
+    if (NULL == self->object)
     {
-
+        printf("NULL pointer\n");
+        return;
     }
 }
 
-void qb_object_destroy(qb_object *object)
+void qb_object_destroy(struct qb_object *object)
 {
-
+    (void)object;
 }
 
