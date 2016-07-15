@@ -1,6 +1,8 @@
 #include "qb_object.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* Copyright (C)-------------------------------------------------------------*/
 
@@ -25,11 +27,16 @@ static void int_method(struct qb_object *const self);
 
 /* Functions definitions-----------------------------------------------------*/
 
-struct qb_object qb_object_create(void)
+qb_object_ptr qb_object_create(void)
 {
-    struct qb_object temp = {0};
+    qb_object_ptr temp = (qb_object_ptr) malloc(sizeof *temp);
+    if (NULL == temp)
+    {
+        printf("NULL pointer");
+        return temp;
+    }
 
-    temp.method = int_method;
+    temp->method = int_method;
 
     return temp;
 }
@@ -43,8 +50,10 @@ static void int_method(struct qb_object *const self)
     }
 }
 
-void qb_object_destroy(struct qb_object *object)
+void qb_object_destroy(qb_object_ptr *object)
 {
-    (void)object;
+    memset(*object, 0, sizeof **object);
+    free(*object);
+    *object = NULL;
 }
 

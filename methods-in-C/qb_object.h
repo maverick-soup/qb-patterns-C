@@ -18,6 +18,7 @@ extern "C"{
 /* Data types----------------------------------------------------------------*/
  
 typedef struct qb_object_impl_s* qb_object_impl_ptr;
+typedef struct qb_object* qb_object_ptr;
 
 struct qb_object
 {
@@ -29,8 +30,8 @@ struct qb_object
 
 /* Exported functions--------------------------------------------------------*/
 
-struct qb_object qb_object_create(void);
-void qb_object_destroy(struct qb_object *object);
+qb_object_ptr qb_object_create(void);
+void qb_object_destroy(qb_object_ptr *object);
 
 #ifdef __cplusplus
 }
