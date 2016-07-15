@@ -1,5 +1,4 @@
 #include "qb_object.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,13 +22,13 @@ struct
 
 /* Internal functions declarations-------------------------------------------*/
 
-static void int_method(struct qb_object *const self);
+static void int_method(qb_object_ptr self);
 
 /* Functions definitions-----------------------------------------------------*/
 
 qb_object_ptr qb_object_create(void)
 {
-    qb_object_ptr temp = (qb_object_ptr) malloc(sizeof *temp);
+    struct qb_object *temp = (struct qb_object *) malloc(sizeof *temp);
     if (NULL == temp)
     {
         printf("NULL pointer");
@@ -41,7 +40,7 @@ qb_object_ptr qb_object_create(void)
     return temp;
 }
 
-static void int_method(struct qb_object *const self)
+static void int_method(qb_object_ptr self)
 {
     if (NULL == self->object)
     {
@@ -52,8 +51,14 @@ static void int_method(struct qb_object *const self)
 
 void qb_object_destroy(qb_object_ptr *object)
 {
-    memset(*object, 0, sizeof **object);
-    free(*object);
+    memset((void *)(*object), 0, sizeof **object);
+
+    if (NULL == (*object)->method)
+    {
+	printf("zz\n");
+    }
+
+    free((void *)(*object));
     *object = NULL;
 }
 

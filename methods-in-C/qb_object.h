@@ -18,11 +18,11 @@ extern "C"{
 /* Data types----------------------------------------------------------------*/
  
 typedef struct qb_object_impl_s* qb_object_impl_ptr;
-typedef struct qb_object* qb_object_ptr;
+typedef struct qb_object const * qb_object_ptr;
 
 struct qb_object
 {
-    void (*method)(struct qb_object *const self);
+    void (*method)(qb_object_ptr self);
     qb_object_impl_ptr object;
 };
 
