@@ -36,7 +36,7 @@ qb_object_ptr qb_object_create(void)
     }
 
     temp->method = int_method;
-
+    temp->object = NULL;
     return temp;
 }
 
