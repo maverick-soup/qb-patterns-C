@@ -9,13 +9,6 @@ int main(int argc, char *argv[])
     (void) argv;
 
     object->method(object);
-
     qb_object_destroy(&object);
-
-    if (NULL == object)
-    {
-	printf("dcdc\n");
-    }
-
     return 1;
 }
