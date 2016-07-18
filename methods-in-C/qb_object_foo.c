@@ -38,7 +38,7 @@ qb_object_ptr qb_object_foo_create(void)
     }
 
     temp->method = int_method;
-    temp->object = int_qb_object_impl_create();;
+    temp->object = int_qb_object_impl_create();
     return temp;
 }
 
