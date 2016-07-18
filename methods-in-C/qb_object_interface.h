@@ -1,5 +1,5 @@
-#ifndef QB_OBJECT_H
-#define QB_OBJECT_H
+#ifndef QB_OBJECT_INTERFACE_H
+#define QB_OBJECT_INTERFACE_H
 
 /* Copyright (C)-------------------------------------------------------------*/
 
@@ -16,7 +16,7 @@ extern "C"{
 /* Macros--------------------------------------------------------------------*/
  
 /* Data types----------------------------------------------------------------*/
- 
+
 typedef struct qb_object_impl_s* qb_object_impl_ptr;
 typedef struct qb_object const * qb_object_ptr;
 
@@ -30,12 +30,9 @@ struct qb_object
 
 /* Exported functions--------------------------------------------------------*/
 
-qb_object_ptr qb_object_create(void);
-void qb_object_destroy(qb_object_ptr *object);
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* QB_OBJECT_H */
+#endif /* QB_OBJECT_INTERFACE_H */
 

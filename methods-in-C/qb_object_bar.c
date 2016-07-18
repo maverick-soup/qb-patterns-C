@@ -1,4 +1,4 @@
-#include "qb_object.h"
+#include "qb_object_bar.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +14,8 @@
 struct
 {
     int size;
+    char temp;
+    char *name;
 } qb_object_impl_s;
 
 /* Variables-----------------------------------------------------------------*/
@@ -28,7 +30,7 @@ static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation);
 
 /* Functions definitions-----------------------------------------------------*/
 
-qb_object_ptr qb_object_create(void)
+qb_object_ptr qb_object_bar_create(void)
 {
     struct qb_object *temp = (struct qb_object *) malloc(sizeof *temp);
     if (NULL == temp)
@@ -38,7 +40,7 @@ qb_object_ptr qb_object_create(void)
     }
 
     temp->method = int_method;
-    temp->object = int_qb_object_impl_create();;
+    temp->object = int_qb_object_impl_create();
     return temp;
 }
 
@@ -53,21 +55,21 @@ static void int_method(qb_object_ptr self)
 
 static qb_object_impl_ptr int_qb_object_impl_create(void)
 {
-    printf("object implementation constructor\n");
+    printf("object bar implementation constructor\n");
     return NULL;
 }
 
-void qb_object_destroy(qb_object_ptr *object)
+void qb_object_bar_destroy(qb_object_ptr *object)
 {
     if (NULL == object)
     {
-        printf("g\n");
+        printf("a\n");
         return;
     }
 
     if (NULL == *object)
     {
-        printf("h\n");
+        printf("b\n");
 	return;
     }
 
@@ -80,5 +82,5 @@ void qb_object_destroy(qb_object_ptr *object)
 static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
 {
     (void)implementation;
-    printf("object implementation destructor\n");
+    printf("object bar implementation destructor\n");
 }
