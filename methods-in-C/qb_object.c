@@ -23,6 +23,8 @@ struct
 /* Internal functions declarations-------------------------------------------*/
 
 static void int_method(qb_object_ptr self);
+static qb_object_impl_ptr int_qb_object_impl_create(void);
+static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation);
 
 /* Functions definitions-----------------------------------------------------*/
 
@@ -36,7 +38,7 @@ qb_object_ptr qb_object_create(void)
     }
 
     temp->method = int_method;
-    temp->object = NULL;
+    temp->object = int_qb_object_impl_create();;
     return temp;
 }
 
@@ -49,10 +51,34 @@ static void int_method(qb_object_ptr self)
     }
 }
 
+static qb_object_impl_ptr int_qb_object_impl_create(void)
+{
+    printf("object implementation constructor\n");
+    return NULL;
+}
+
 void qb_object_destroy(qb_object_ptr *object)
 {
+    if (NULL == object)
+    {
+        printf("g\n");
+        return;
+    }
+
+    if (NULL == *object)
+    {
+        printf("h\n");
+	return;
+    }
+
+    int_qb_object_impl_destroy((qb_object_impl_ptr *)&(*object)->object);
     memset((void *)(*object), 0, sizeof **object);
     free((void *)(*object));
     *object = NULL;
 }
 
+static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
+{
+    (void)implementation;
+    printf("object implementation destructor\n");
+}

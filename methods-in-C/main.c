@@ -10,5 +10,6 @@ int main(int argc, char *argv[])
 
     object->method(object);
     qb_object_destroy(&object);
-    return 1;
+
+    return 0;
 }
