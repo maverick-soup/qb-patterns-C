@@ -55,7 +55,7 @@ static void int_method(qb_object_ptr self)
 
 static qb_object_impl_ptr int_qb_object_impl_create(void)
 {
-    printf("object bar implementation constructor\n");
+    printf("object BAR implementation constructor\n");
     return NULL;
 }
 
@@ -63,13 +63,13 @@ void qb_object_bar_destroy(qb_object_ptr *object)
 {
     if (NULL == object)
     {
-        printf("a\n");
+        printf("prevents from NULL as argument\n");
         return;
     }
 
     if (NULL == *object)
     {
-        printf("b\n");
+        printf("prevetns from pointing to NULL\n");
 	return;
     }
 
@@ -82,5 +82,5 @@ void qb_object_bar_destroy(qb_object_ptr *object)
 static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
 {
     (void)implementation;
-    printf("object bar implementation destructor\n");
+    printf("object BAR implementation destructor\n");
 }
