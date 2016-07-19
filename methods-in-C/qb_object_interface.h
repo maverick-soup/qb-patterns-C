@@ -23,7 +23,7 @@ typedef struct qb_object const * qb_object_ptr;
 struct qb_object
 {
     void (*method)(qb_object_ptr self);
-    qb_object_impl_ptr object;
+    qb_object_impl_ptr impl;
 };
 
 /* Exported variables--------------------------------------------------------*/

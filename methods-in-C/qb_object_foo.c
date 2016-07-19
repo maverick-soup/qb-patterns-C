@@ -14,10 +14,10 @@
 
 /* Data types----------------------------------------------------------------*/
 
-struct
+struct qb_object_impl_s
 {
     int size;
-} qb_object_impl_s;
+};
 
 /* Variables-----------------------------------------------------------------*/
 
@@ -41,23 +41,38 @@ qb_object_ptr qb_object_foo_create(void)
     }
 
     temp->method = int_method;
-    temp->object = int_qb_object_impl_create();
+    temp->impl = int_qb_object_impl_create();
     return temp;
 }
 
 static void int_method(qb_object_ptr self)
 {
-    if (NULL == self->object)
+    if (NULL == self)
     {
         QB_LOG("NULL pointer");
         return;
     }
+
+    if (NULL == self->impl)
+    {
+        QB_LOG("NULL pointer");
+        return;
+    }
+
+    QB_LOG("Method value size %d", self->impl->size);
 }
 
 static qb_object_impl_ptr int_qb_object_impl_create(void)
 {
-    QB_LOG("object FOO implementation constructor");
-    return NULL;
+    qb_object_impl_ptr temp = (qb_object_impl_ptr) malloc(sizeof *temp);
+    if (NULL == temp)
+    {
+        QB_LOG("NULL pointer");
+        return temp;
+    }
+
+    memset(temp, 0, sizeof *temp);
+    return temp;
 }
 
 void qb_object_foo_destroy(qb_object_ptr *object)
@@ -70,11 +85,11 @@ void qb_object_foo_destroy(qb_object_ptr *object)
 
     if (NULL == *object)
     {
-        QB_LOG("prevetns from pointing to NULL");
+        QB_LOG("prevents from pointing to NULL");
 	return;
     }
 
-    int_qb_object_impl_destroy((qb_object_impl_ptr *)&(*object)->object);
+    int_qb_object_impl_destroy((qb_object_impl_ptr *)&(*object)->impl);
     memset((void *)(*object), 0, sizeof **object);
     free((void *)(*object));
     *object = NULL;
@@ -82,6 +97,19 @@ void qb_object_foo_destroy(qb_object_ptr *object)
 
 static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
 {
-    (void)implementation;
-    QB_LOG("object FOO implementation destructor");
+    if (NULL == implementation)
+    {
+        QB_LOG("prevents from NULL as argument");
+        return;
+    }
+
+    if (NULL == *implementation)
+    {
+        QB_LOG("prevents from pointing to NULL");
+	return;
+    }
+
+    memset((void *)(*implementation), 0, sizeof **implementation);
+    free((void *)(*implementation));
+    *implementation = NULL;
 }
