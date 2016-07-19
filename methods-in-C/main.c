@@ -1,6 +1,9 @@
 #include "qb_object_interface.h"
 #include "qb_object_foo.h"
 #include "qb_object_bar.h"
+
+#include "../utils/logger/qb_logger.h"
+
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -10,6 +13,8 @@ int main(int argc, char *argv[])
     
     (void) argc;
     (void) argv;
+
+    QB_LOG("test %d", 102);
 
     foo->method(foo);
     qb_object_foo_destroy(&foo);
