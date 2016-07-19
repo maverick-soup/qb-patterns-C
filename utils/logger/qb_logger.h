@@ -15,7 +15,7 @@ extern "C"{
  
 /* Macros--------------------------------------------------------------------*/
 
-#define QB_LOG(format, ...) do{qb_logger_log(__FILE__, __LINE__, format, __VA_ARGS__);}while(0)
+#define QB_LOG(...) do{qb_logger_log(__FILE__, __LINE__, __VA_ARGS__);}while(0)
 
 /* Data types----------------------------------------------------------------*/
 
@@ -23,7 +23,7 @@ extern "C"{
 
 /* Exported functions--------------------------------------------------------*/
 
-void qb_logger_log(char const *const file, int const line, char const *const format, ...);
+void qb_logger_log(char const *const file, int const line, ...);
 
 #ifdef __cplusplus
 }

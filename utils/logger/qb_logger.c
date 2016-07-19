@@ -19,16 +19,18 @@
 
 /* Functions definitions-----------------------------------------------------*/
 
-void qb_logger_log(char const *const file, int const line, char const *const format, ...)
+void qb_logger_log(char const *const file, int const line, ...)
 {
     enum{MAX_LOG_BUFFER_LEN = 1024};
     char buffer[MAX_LOG_BUFFER_LEN + 1] = {0};
 
+    char const* format = NULL;
     va_list extra_params = NULL;
     
-    va_start(extra_params, format);
+    va_start(extra_params, line);
+    format = va_arg(extra_params, char const*);
     vsnprintf(buffer, sizeof buffer, format, extra_params);
-    va_end(extra_params);
-
     printf("%s (%s:%d)\n", buffer, file, line);
+    va_end(extra_params);
 }
+

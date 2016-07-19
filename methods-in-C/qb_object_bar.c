@@ -1,4 +1,7 @@
 #include "qb_object_bar.h"
+
+#include "../utils/logger/qb_logger.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +38,7 @@ qb_object_ptr qb_object_bar_create(void)
     struct qb_object *temp = (struct qb_object *) malloc(sizeof *temp);
     if (NULL == temp)
     {
-        printf("NULL pointer\n");
+        QB_LOG("NULL pointer");
         return temp;
     }
 
@@ -48,14 +51,14 @@ static void int_method(qb_object_ptr self)
 {
     if (NULL == self->object)
     {
-        printf("NULL pointer\n");
+        QB_LOG("NULL pointer");
         return;
     }
 }
 
 static qb_object_impl_ptr int_qb_object_impl_create(void)
 {
-    printf("object BAR implementation constructor\n");
+    QB_LOG("object BAR implementation constructor");
     return NULL;
 }
 
@@ -63,13 +66,13 @@ void qb_object_bar_destroy(qb_object_ptr *object)
 {
     if (NULL == object)
     {
-        printf("prevents from NULL as argument\n");
+        QB_LOG("prevents from NULL as argument");
         return;
     }
 
     if (NULL == *object)
     {
-        printf("prevetns from pointing to NULL\n");
+        QB_LOG("prevetns from pointing to NULL");
 	return;
     }
 
@@ -82,5 +85,5 @@ void qb_object_bar_destroy(qb_object_ptr *object)
 static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
 {
     (void)implementation;
-    printf("object BAR implementation destructor\n");
+    QB_LOG("object BAR implementation destructor");
 }

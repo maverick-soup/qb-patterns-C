@@ -14,8 +14,6 @@ int main(int argc, char *argv[])
     (void) argc;
     (void) argv;
 
-    QB_LOG("test %d", 102);
-
     foo->method(foo);
     qb_object_foo_destroy(&foo);
 
