@@ -42,6 +42,7 @@ qb_object_ptr qb_object_bar_create(void)
         return temp;
     }
 
+    *temp = (struct qb_object){0};
     temp->method = int_method;
     temp->impl = int_qb_object_impl_create();
     return temp;
@@ -74,28 +75,29 @@ static qb_object_impl_ptr int_qb_object_impl_create(void)
         return temp;
     }
 
-    memset(temp, 0, sizeof *temp);
+    *temp = (struct qb_object_impl_s){0};
     return temp;
 }
 
 void qb_object_bar_destroy(qb_object_ptr *object)
 {
-    if (NULL == object)
+    struct qb_object **mutable = (struct qb_object **)object;
+    if (NULL == mutable)
     {
         QB_LOG("prevents from NULL as argument");
         return;
     }
 
-    if (NULL == *object)
+    if (NULL == *mutable)
     {
         QB_LOG("prevetns from pointing to NULL");
 	return;
     }
 
-    int_qb_object_impl_destroy((qb_object_impl_ptr *)&(*object)->impl);
-    memset((void *)(*object), 0, sizeof **object);
-    free((void *)(*object));
-    *object = NULL;
+    int_qb_object_impl_destroy((qb_object_impl_ptr *)&(*mutable)->impl);
+    **mutable = (struct qb_object){0};
+    free((void *)(*mutable));
+    *mutable = NULL;
 }
 
 static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
@@ -112,7 +114,7 @@ static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation)
 	return;
     }
 
-    memset((void *)(*implementation), 0, sizeof **implementation);
+    **implementation = (struct qb_object_impl_s){0};
     free((void *)(*implementation));
     *implementation = NULL;
 }
