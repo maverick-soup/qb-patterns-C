@@ -20,10 +20,7 @@ int main(int argc, char *argv[])
     (void) argc;
     (void) argv;
 
-    qb_object_ptr foo = qb_object_foo_create();
-    qb_object_ptr bar = qb_object_bar_create();
-
-    qb_object_ptr container[] = {foo, bar};
+    qb_object_ptr container[] = {qb_object_foo_create(), qb_object_bar_create()};
     qb_object_ptr *begin = container;
     qb_object_ptr *end = begin + (sizeof container / sizeof *container);
 
