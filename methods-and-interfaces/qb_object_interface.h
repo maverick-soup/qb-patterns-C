@@ -4,7 +4,8 @@
 /* Copyright (C)-------------------------------------------------------------*/
 
 /* Includes------------------------------------------------------------------*/
- 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -23,6 +24,7 @@ typedef struct qb_object const * qb_object_ptr;
 struct qb_object
 {
     void (*method)(qb_object_ptr self);
+    void (*destroy)(qb_object_ptr *self);
     qb_object_impl_ptr impl;
 };
 

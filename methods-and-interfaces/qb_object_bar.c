@@ -1,10 +1,9 @@
-#include "qb_object_foo.h"
+#include "qb_object_bar.h"
 
 #include "../utils/logger/qb_logger.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
 
 /* Copyright (C)-------------------------------------------------------------*/
@@ -17,8 +16,9 @@
 
 struct qb_object_impl_s
 {
-    uint32_t typeof;
     int size;
+    char temp;
+    char *name;
 };
 
 /* Variables-----------------------------------------------------------------*/
@@ -33,7 +33,7 @@ static void int_qb_object_impl_destroy(qb_object_impl_ptr *implementation);
 
 /* Functions definitions-----------------------------------------------------*/
 
-qb_object_ptr qb_object_foo_create(void)
+qb_object_ptr qb_object_bar_create(void)
 {
     struct qb_object *temp = (struct qb_object *) malloc(sizeof *temp);
     if (NULL == temp)
@@ -44,6 +44,7 @@ qb_object_ptr qb_object_foo_create(void)
 
     *temp = (struct qb_object){0};
     temp->method = int_method;
+    temp->destroy = qb_object_bar_destroy;
     temp->impl = int_qb_object_impl_create();
     return temp;
 }
@@ -62,7 +63,8 @@ static void int_method(qb_object_ptr self)
         return;
     }
 
-    QB_LOG("Method value size %d", self->impl->size);
+    self->impl->temp = 60;
+    QB_LOG("Method value temp %c", self->impl->temp);
 }
 
 static qb_object_impl_ptr int_qb_object_impl_create(void)
@@ -78,7 +80,7 @@ static qb_object_impl_ptr int_qb_object_impl_create(void)
     return temp;
 }
 
-void qb_object_foo_destroy(qb_object_ptr *object)
+void qb_object_bar_destroy(qb_object_ptr *object)
 {
     struct qb_object **mutable = (struct qb_object **)object;
     if (NULL == mutable)
@@ -89,7 +91,7 @@ void qb_object_foo_destroy(qb_object_ptr *object)
 
     if (NULL == *mutable)
     {
-        QB_LOG("prevents from pointing to NULL");
+        QB_LOG("prevetns from pointing to NULL");
 	return;
     }
 
