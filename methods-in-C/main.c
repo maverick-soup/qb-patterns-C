@@ -14,10 +14,16 @@ int main(int argc, char *argv[])
     (void) argc;
     (void) argv;
 
-    foo->method(foo);
+    if (NULL != foo->method)
+    {
+        foo->method(foo);
+    }
     qb_object_foo_destroy(&foo);
 
-    bar->method(bar);
+    if (NULL != bar->method)
+    {
+        bar->method(bar);
+    }
     qb_object_bar_destroy(&bar);
 
     return 0;
