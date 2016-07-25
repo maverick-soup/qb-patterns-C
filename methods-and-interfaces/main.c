@@ -36,7 +36,7 @@ static void int_iterate(qb_object_ptr *const begin,
 {
     for (qb_object_ptr *iter = begin; iter != end; ++iter)
     {
-        if (NULL != *iter && NULL != (*iter)->destroy)
+        if (NULL != *iter)
         {
 	    strategy(iter);
         }
@@ -45,10 +45,16 @@ static void int_iterate(qb_object_ptr *const begin,
 
 static void int_method_strategy(qb_object_ptr *iter)
 {
-    (*iter)->method(*iter);
+    if (NULL != (*iter)->method)
+    {
+        (*iter)->method(*iter);
+    }
 }
 
 static void int_destroy_strategy(qb_object_ptr *iter)
 {
-    (*iter)->destroy(iter);
+    if (NULL != (*iter)->destroy)
+    {
+        (*iter)->destroy(iter);
+    }
 }
