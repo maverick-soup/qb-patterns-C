@@ -3,14 +3,7 @@ CC=gcc
 CFLAGS:=-std=c99 -Wall -Wextra -Wpedantic -Werror -c
 LDFLAGS=
 
-SOURCES+= \
-	main.c \
-	qb_object_foo.c \
-	qb_object_bar.c \
-	../utils/logger/qb_logger.c
-
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=method
 
 .PHONY : all
 all : app
@@ -26,3 +19,4 @@ $(EXECUTABLE): $(OBJECTS)
 .PHONY : clean
 clean :
 	rm $(OBJECTS) $(EXECUTABLE)
+
