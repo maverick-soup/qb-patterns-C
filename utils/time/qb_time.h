@@ -32,3 +32,4 @@ uint32_t qb_time_get_total_number_of_leap_years(uint32_t const year);
 #endif
 
 #endif /* QB_TIME_H */
+

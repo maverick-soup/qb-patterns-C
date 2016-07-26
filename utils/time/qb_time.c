@@ -49,3 +49,4 @@ uint32_t qb_time_get_total_number_of_leap_years(uint32_t const year)
             - number_of_years_divisible_by_100
             + number_of_years_divisible_by_400;
 }
+
