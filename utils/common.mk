@@ -1,5 +1,5 @@
 
-CC=gcc
+CC=gcc-4.9
 CFLAGS:=-std=c99 -Wall -Wextra -Wpedantic -Werror -c
 LDFLAGS=
 

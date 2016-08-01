@@ -25,7 +25,7 @@ void qb_logger_log(char const *const file, int const line, ...)
     char buffer[MAX_LOG_BUFFER_LEN + 1] = {0};
 
     char const* format = NULL;
-    va_list extra_params = NULL;
+    va_list extra_params;
     
     va_start(extra_params, line);
     format = va_arg(extra_params, char const*);
